@@ -5419,11 +5419,44 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  data: function data() {
+    return {
+      name: '',
+      surname: '',
+      patronymic: '',
+      company: '',
+      email: '2@gmail.com',
+      phone: '',
+      date_of_birth: '',
+      photo: ''
+    };
+  },
   methods: {
-    createNote: function createNote() {
+    createNote: function createNote(e) {
+      var fd = new FormData(this.$refs.form);
+      fd.append("photo", this.photo.files);
+      this.photo = e.target.files;
+      console.log(e.target.files);
       axios.post('/api/v1/create/notebook', {
-        name: this.name
+        name: this.name,
+        surname: this.surname,
+        patronymic: this.patronymic,
+        company: this.company,
+        email: this.email,
+        phone: this.phone,
+        date_of_birth: this.date_of_birth,
+        data: {
+          photo: e.target.files
+        }
+      }).then(function (response) {
+        console.log(response);
+      })["catch"](function (error) {
+        console.log("ERRRR:: ", error.response.data);
       });
+    },
+    handleFileObject: function handleFileObject(e) {
+      this.photo = e.target.files[0];
+      console.log(this.photo);
     }
   }
 });
@@ -28483,182 +28516,270 @@ var render = function () {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _c("form", [
-      _vm._m(0),
-      _vm._v(" "),
-      _vm._m(1),
-      _vm._v(" "),
-      _vm._m(2),
-      _vm._v(" "),
-      _vm._m(3),
-      _vm._v(" "),
-      _vm._m(4),
-      _vm._v(" "),
-      _vm._m(5),
-      _vm._v(" "),
-      _vm._m(6),
-      _vm._v(" "),
-      _vm._m(7),
-      _vm._v(" "),
-      _c(
-        "button",
-        { staticClass: "btn btn-primary", on: { click: _vm.createNote } },
-        [_vm._v("Submit")]
-      ),
-    ]),
+    _c(
+      "form",
+      {
+        ref: "form",
+        attrs: { enctype: "multipart/form-data" },
+        on: {
+          submit: function ($event) {
+            $event.preventDefault()
+            return _vm.createNote.apply(null, arguments)
+          },
+        },
+      },
+      [
+        _c("div", { staticClass: "form-group" }, [
+          _c("label", { attrs: { for: "exampleInputEmail1" } }, [
+            _vm._v("Name"),
+          ]),
+          _vm._v(" "),
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.name,
+                expression: "name",
+              },
+            ],
+            staticClass: "form-control",
+            attrs: {
+              type: "text",
+              id: "exampleInputEmail1",
+              "aria-describedby": "emailHelp",
+              name: "name",
+            },
+            domProps: { value: _vm.name },
+            on: {
+              input: function ($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.name = $event.target.value
+              },
+            },
+          }),
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "form-group" }, [
+          _c("label", { attrs: { for: "exampleInputEmail1" } }, [
+            _vm._v("Surname"),
+          ]),
+          _vm._v(" "),
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.surname,
+                expression: "surname",
+              },
+            ],
+            staticClass: "form-control",
+            attrs: {
+              type: "text",
+              id: "exampleInputEmail1",
+              "aria-describedby": "emailHelp",
+              name: "surname",
+            },
+            domProps: { value: _vm.surname },
+            on: {
+              input: function ($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.surname = $event.target.value
+              },
+            },
+          }),
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "form-group" }, [
+          _c("label", { attrs: { for: "exampleInputEmail1" } }, [
+            _vm._v("Patronymic"),
+          ]),
+          _vm._v(" "),
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.patronymic,
+                expression: "patronymic",
+              },
+            ],
+            staticClass: "form-control",
+            attrs: {
+              type: "text",
+              id: "exampleInputEmail1",
+              "aria-describedby": "emailHelp",
+              name: "patronymic",
+            },
+            domProps: { value: _vm.patronymic },
+            on: {
+              input: function ($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.patronymic = $event.target.value
+              },
+            },
+          }),
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "form-group" }, [
+          _c("label", { attrs: { for: "exampleInputEmail1" } }, [
+            _vm._v("Email"),
+          ]),
+          _vm._v(" "),
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.email,
+                expression: "email",
+              },
+            ],
+            staticClass: "form-control",
+            attrs: {
+              type: "email",
+              id: "exampleInputEmail1",
+              "aria-describedby": "emailHelp",
+              name: "email",
+            },
+            domProps: { value: _vm.email },
+            on: {
+              input: function ($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.email = $event.target.value
+              },
+            },
+          }),
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "form-group" }, [
+          _c("label", { attrs: { for: "exampleInputEmail1" } }, [
+            _vm._v("Company"),
+          ]),
+          _vm._v(" "),
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.company,
+                expression: "company",
+              },
+            ],
+            staticClass: "form-control",
+            attrs: {
+              type: "text",
+              id: "exampleInputEmail1",
+              "aria-describedby": "emailHelp",
+              name: "company",
+            },
+            domProps: { value: _vm.company },
+            on: {
+              input: function ($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.company = $event.target.value
+              },
+            },
+          }),
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "form-group" }, [
+          _c("label", { attrs: { for: "exampleInputEmail1" } }, [
+            _vm._v("Phone"),
+          ]),
+          _vm._v(" "),
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.phone,
+                expression: "phone",
+              },
+            ],
+            staticClass: "form-control",
+            attrs: {
+              type: "tel",
+              id: "exampleInputEmail1",
+              "aria-describedby": "emailHelp",
+              name: "phone",
+            },
+            domProps: { value: _vm.phone },
+            on: {
+              input: function ($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.phone = $event.target.value
+              },
+            },
+          }),
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "form-group" }, [
+          _c("label", { attrs: { for: "exampleInputEmail1" } }, [
+            _vm._v("Date of birth"),
+          ]),
+          _vm._v(" "),
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.date_of_birth,
+                expression: "date_of_birth",
+              },
+            ],
+            staticClass: "form-control",
+            attrs: {
+              type: "date",
+              id: "exampleInputEmail1",
+              "aria-describedby": "emailHelp",
+              name: "date_of_birth",
+            },
+            domProps: { value: _vm.date_of_birth },
+            on: {
+              input: function ($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.date_of_birth = $event.target.value
+              },
+            },
+          }),
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "form-group" }, [
+          _c(
+            "label",
+            { staticClass: "form-label", attrs: { for: "customFile" } },
+            [_vm._v("Image")]
+          ),
+          _vm._v(" "),
+          _c("input", {
+            staticClass: "form-control",
+            attrs: { type: "file", id: "customFile", name: "photo" },
+            on: { change: _vm.handleFileObject },
+          }),
+        ]),
+        _vm._v(" "),
+        _c("button", { staticClass: "btn btn-primary" }, [_vm._v("Submit")]),
+      ]
+    ),
   ])
 }
-var staticRenderFns = [
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form-group" }, [
-      _c("label", { attrs: { for: "exampleInputEmail1" } }, [_vm._v("Name")]),
-      _vm._v(" "),
-      _c("input", {
-        staticClass: "form-control",
-        attrs: {
-          type: "text",
-          id: "exampleInputEmail1",
-          "aria-describedby": "emailHelp",
-          name: "name",
-        },
-      }),
-    ])
-  },
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form-group" }, [
-      _c("label", { attrs: { for: "exampleInputEmail1" } }, [
-        _vm._v("Surname"),
-      ]),
-      _vm._v(" "),
-      _c("input", {
-        staticClass: "form-control",
-        attrs: {
-          type: "text",
-          id: "exampleInputEmail1",
-          "aria-describedby": "emailHelp",
-          name: "surname",
-        },
-      }),
-    ])
-  },
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form-group" }, [
-      _c("label", { attrs: { for: "exampleInputEmail1" } }, [
-        _vm._v("Patronymic"),
-      ]),
-      _vm._v(" "),
-      _c("input", {
-        staticClass: "form-control",
-        attrs: {
-          type: "text",
-          id: "exampleInputEmail1",
-          "aria-describedby": "emailHelp",
-          name: "patronymic",
-        },
-      }),
-    ])
-  },
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form-group" }, [
-      _c("label", { attrs: { for: "exampleInputEmail1" } }, [_vm._v("Email")]),
-      _vm._v(" "),
-      _c("input", {
-        staticClass: "form-control",
-        attrs: {
-          type: "email",
-          id: "exampleInputEmail1",
-          "aria-describedby": "emailHelp",
-          name: "email",
-        },
-      }),
-    ])
-  },
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form-group" }, [
-      _c("label", { attrs: { for: "exampleInputEmail1" } }, [
-        _vm._v("Company"),
-      ]),
-      _vm._v(" "),
-      _c("input", {
-        staticClass: "form-control",
-        attrs: {
-          type: "text",
-          id: "exampleInputEmail1",
-          "aria-describedby": "emailHelp",
-          name: "company",
-        },
-      }),
-    ])
-  },
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form-group" }, [
-      _c("label", { attrs: { for: "exampleInputEmail1" } }, [_vm._v("Phone")]),
-      _vm._v(" "),
-      _c("input", {
-        staticClass: "form-control",
-        attrs: {
-          type: "tel",
-          id: "exampleInputEmail1",
-          "aria-describedby": "emailHelp",
-          name: "phone",
-        },
-      }),
-    ])
-  },
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form-group" }, [
-      _c("label", { attrs: { for: "exampleInputEmail1" } }, [
-        _vm._v("Date of birth"),
-      ]),
-      _vm._v(" "),
-      _c("input", {
-        staticClass: "form-control",
-        attrs: {
-          type: "date",
-          id: "exampleInputEmail1",
-          "aria-describedby": "emailHelp",
-          name: "date_of_birth",
-        },
-      }),
-    ])
-  },
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form-group" }, [
-      _c("label", { staticClass: "form-label", attrs: { for: "customFile" } }, [
-        _vm._v("Image"),
-      ]),
-      _vm._v(" "),
-      _c("input", {
-        staticClass: "form-control",
-        attrs: { type: "file", id: "customFile", name: "photo" },
-      }),
-    ])
-  },
-]
+var staticRenderFns = []
 render._withStripped = true
 
 

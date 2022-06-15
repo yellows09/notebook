@@ -28,7 +28,8 @@ class NoteFilterRequest extends FormRequest
             'surname' => 'required|max:191',
             'patronymic' => 'required|max:191',
             'email' => 'required|email',
-            'photo' => 'nullable|mimes:jpg,bmp,png',
+            'photo' => 'array|nullable',
+            'photo.*' => 'image|file|mimes:jpg,png,jpeg,gif|max:4096',
             'date_of_birth' => 'nullable',
             'company' => 'nullable',
             'phone' => 'nullable'

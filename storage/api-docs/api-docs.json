@@ -1,0 +1,170 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "L5 OpenApi",
+        "description": "L5 Swagger OpenApi description",
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/api/v1/notebook": {
+            "get": {
+                "description": "Get All notes",
+                "operationId": "7175bbb53ced033a5f1f435b193b2957",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    }
+                }
+            }
+        },
+        "/api/v1/create/notebook": {
+            "post": {
+                "description": "Create a new note",
+                "operationId": "a3d19f63e72ffee42db5d3f089cf6f79",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "name": {
+                                        "description": "User name",
+                                        "type": "string"
+                                    },
+                                    "surname": {
+                                        "description": "User surname",
+                                        "type": "string"
+                                    },
+                                    "patronymic": {
+                                        "description": "User patronymic",
+                                        "type": "string"
+                                    },
+                                    "email": {
+                                        "description": "User email",
+                                        "type": "string",
+                                        "default": "string@gmail.com"
+                                    },
+                                    "company": {
+                                        "description": "User company",
+                                        "type": "string"
+                                    },
+                                    "phone": {
+                                        "description": "User phone",
+                                        "type": "string"
+                                    },
+                                    "date_of_birth": {
+                                        "description": "User date_of_birth",
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "successfully created"
+                    }
+                }
+            }
+        },
+        "/api/v1/show/notebook/{id}": {
+            "get": {
+                "description": "Show one note",
+                "operationId": "e6a08a6ff220020d1185399ce5a021ee",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "User id"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "404": {
+                        "description": "Not found"
+                    }
+                }
+            }
+        },
+        "/api/v1/update/notebook/{id}": {
+            "post": {
+                "description": "Update note",
+                "operationId": "addPet",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "User id"
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "name": {
+                                        "description": "User name",
+                                        "type": "string"
+                                    },
+                                    "surname": {
+                                        "description": "User surname",
+                                        "type": "string"
+                                    },
+                                    "patronymic": {
+                                        "description": "User patronymic",
+                                        "type": "string"
+                                    },
+                                    "email": {
+                                        "description": "User email",
+                                        "type": "string"
+                                    },
+                                    "company": {
+                                        "description": "User company",
+                                        "type": "string"
+                                    },
+                                    "phone": {
+                                        "description": "User phone",
+                                        "type": "string"
+                                    },
+                                    "date_of_birth": {
+                                        "description": "User date_of_birth",
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "successfully created"
+                    }
+                }
+            }
+        },
+        "/api/v1/delete/notebook/{id}": {
+            "delete": {
+                "description": "Delete note",
+                "operationId": "c13d9119ec1853cff714a65426235006",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "User id for delete"
+                    }
+                ],
+                "responses": {
+                    "401": {
+                        "description": "Successful deleted"
+                    }
+                }
+            }
+        }
+    }
+}
