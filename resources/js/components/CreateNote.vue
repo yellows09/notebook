@@ -38,11 +38,6 @@
                        name="date_of_birth">
             </div>
 
-            <div class="form-group">
-                <label class="form-label" for="customFile">Image</label>
-                <input type="file" class="form-control" id="customFile" name="photo" @change="handleFileObject"/>
-            </div>
-
             <button class="btn btn-primary">Submit</button>
         </form>
     </div>
@@ -56,18 +51,14 @@ export default {
             surname: '',
             patronymic: '',
             company: '',
-            email: '2@gmail.com',
+            email: '',
             phone: '',
             date_of_birth: '',
             photo: ''
         }
     },
     methods: {
-        createNote(e) {
-            const fd = new FormData(this.$refs.form)
-            fd.append("photo", this.photo.files)
-            this.photo = e.target.files
-            console.log(e.target.files);
+        createNote() {
             axios.post('/api/v1/create/notebook',{
                 name: this.name,
                 surname: this.surname,
@@ -76,19 +67,12 @@ export default {
                 email: this.email,
                 phone: this.phone,
                 date_of_birth: this.date_of_birth,
-                data: {
-                    photo: e.target.files
-                }
             }).then(response =>{
                 console.log(response)
             }).catch(error => {
                 console.log("ERRRR:: ",error.response.data);
             });
         },
-        handleFileObject(e){
-            this.photo = e.target.files[0];
-            console.log(this.photo)
-        }
     }
 }
 </script>

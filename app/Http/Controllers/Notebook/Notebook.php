@@ -27,7 +27,7 @@ class Notebook extends Controller
      */
     public function index()
     {
-        return NotebookResource::collection(\App\Models\Notebook::orderBy('created_at','desc')->get());
+        return NotebookResource::collection(\App\Models\Notebook::orderBy('created_at', 'desc')->get());
     }
 
 
@@ -86,17 +86,19 @@ class Notebook extends Controller
      *     ),
      * )
      */
-    public function create(NoteFilterRequest $filterRequest,Request $request): \Illuminate\Http\JsonResponse
+    public function create(NoteFilterRequest $filterRequest): \Illuminate\Http\JsonResponse
     {
-        if($request->isMethod('post')){
-            $filtered = $filterRequest->validated();
-            if($request->file('photo')){
-                Storage::put('public/img', $request->file('photo'));
-            }
-            \App\Models\Notebook::create($filtered);
-            return response()->json('Note is created',201);
-        }
-        return response()->json('error');
+        $filtered = $filterRequest->validated();
+        \App\Models\Notebook::create([
+            'name' => $filtered['name'],
+            'surname' => $filtered['surname'],
+            'patronymic' => $filtered['patronymic'],
+            'email' => $filtered['email'],
+            'phone' => $filtered['phone'],
+            'company' => $filtered['company'] || null,
+            'date_of_birth' => $filtered['date_of_birth'] || null
+        ]);
+        return response()->json('Note is created', 201);
     }
 
     /**
@@ -214,7 +216,7 @@ class Notebook extends Controller
         $updateNote = \App\Models\Notebook::find($id);
         if ($updateNote !== null) {
             $updateNote->update($request->input());
-            return response()->json('note is updated',201);
+            return response()->json('note is updated', 201);
         } else {
             return response()->json('Note is not found', 404);
         }
@@ -240,11 +242,11 @@ class Notebook extends Controller
     public function destroy($id)
     {
         $deleteNote = \App\Models\Notebook::find($id);
-        if($deleteNote !== 0){
+        if ($deleteNote !== 0) {
             $deleteNote->delete();
-            return response()->json('note is deleted',410);
-        }else{
-            return response()->json('note is not found',404);
+            return response()->json('note is deleted', 410);
+        } else {
+            return response()->json('note is not found', 404);
         }
     }
 }

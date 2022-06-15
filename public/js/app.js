@@ -5413,11 +5413,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
@@ -5425,18 +5420,14 @@ __webpack_require__.r(__webpack_exports__);
       surname: '',
       patronymic: '',
       company: '',
-      email: '2@gmail.com',
+      email: '',
       phone: '',
       date_of_birth: '',
       photo: ''
     };
   },
   methods: {
-    createNote: function createNote(e) {
-      var fd = new FormData(this.$refs.form);
-      fd.append("photo", this.photo.files);
-      this.photo = e.target.files;
-      console.log(e.target.files);
+    createNote: function createNote() {
       axios.post('/api/v1/create/notebook', {
         name: this.name,
         surname: this.surname,
@@ -5444,19 +5435,12 @@ __webpack_require__.r(__webpack_exports__);
         company: this.company,
         email: this.email,
         phone: this.phone,
-        date_of_birth: this.date_of_birth,
-        data: {
-          photo: e.target.files
-        }
+        date_of_birth: this.date_of_birth
       }).then(function (response) {
         console.log(response);
       })["catch"](function (error) {
         console.log("ERRRR:: ", error.response.data);
       });
-    },
-    handleFileObject: function handleFileObject(e) {
-      this.photo = e.target.files[0];
-      console.log(this.photo);
     }
   }
 });
@@ -28757,20 +28741,6 @@ var render = function () {
                 _vm.date_of_birth = $event.target.value
               },
             },
-          }),
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "form-group" }, [
-          _c(
-            "label",
-            { staticClass: "form-label", attrs: { for: "customFile" } },
-            [_vm._v("Image")]
-          ),
-          _vm._v(" "),
-          _c("input", {
-            staticClass: "form-control",
-            attrs: { type: "file", id: "customFile", name: "photo" },
-            on: { change: _vm.handleFileObject },
           }),
         ]),
         _vm._v(" "),
